@@ -1,0 +1,11 @@
+{
+  "name": "shattered-lands-island-generator",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Foundry VTT module for generating Shattered Lands 7-hex region journals.",
+  "type": "module",
+  "scripts": {
+    "check": "node -e \"console.log('No build step yet')\""
+  },
+  "license": "MIT"
+}

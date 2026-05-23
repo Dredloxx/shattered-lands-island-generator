@@ -1,0 +1,75 @@
+{
+  "id": "stormbreak-coast-01",
+  "name": "Stormbreak Coast",
+  "regionType": "Storm-worn tropical coast",
+  "dangerLevel": "Medium",
+  "factionInfluence": ["Wreck scavengers", "Imperial surveyors"],
+  "themeTags": ["shipwrecks", "salt rot", "old wards"],
+  "travelFeel": "Wind-battered shores, humid jungle paths, and unstable stone ridges.",
+  "summary": "A fractured coastal region where wreckage, old magic, and opportunistic raiders create constant tension.",
+  "hexes": [
+    {
+      "label": "Hex 1",
+      "terrain": "Beach cove",
+      "featureType": "Minor Feature",
+      "occupants": "Carrion crabs and scavenger birds",
+      "discovery": "A broken cargo chest with waterlogged charts",
+      "hook": "One chart references an inland shrine marked with a warning sigil.",
+      "gmNote": "Foreshadows Hex 5."
+    },
+    {
+      "label": "Hex 2",
+      "terrain": "Jungle path",
+      "featureType": "Travel",
+      "occupants": "Skittish reptiles and biting insects",
+      "discovery": "Fresh bootprints vanishing into heavy brush",
+      "hook": "A cautious party can shadow the tracks to a hidden camp.",
+      "gmNote": "Use as pacing space."
+    },
+    {
+      "label": "Hex 3",
+      "terrain": "Cliff overlook",
+      "featureType": "Encounter",
+      "occupants": "A scavenger lookout with trained glider lizards",
+      "discovery": "Signal mirrors pointed toward the sea",
+      "hook": "The lookout can reveal which wrecks were deliberately lured ashore.",
+      "gmNote": "Can become social or combat."
+    },
+    {
+      "label": "Hex 4",
+      "terrain": "Mangrove inlet",
+      "featureType": "Minor Feature",
+      "occupants": "No permanent occupants",
+      "discovery": "A half-sunken skiff carrying ceremonial masks",
+      "hook": "The masks belong to a nearby island culture and were not meant to be here.",
+      "gmNote": "Good clue hex."
+    },
+    {
+      "label": "Hex 5",
+      "terrain": "Ruin-choked ridge",
+      "featureType": "Adventure Site",
+      "occupants": "Storm-touched guardians bound to old wardstones",
+      "discovery": "A cracked shrine with a sealed lower chamber",
+      "hook": "The chamber contains a map fragment tied to another region.",
+      "gmNote": "Primary set-piece hex."
+    },
+    {
+      "label": "Hex 6",
+      "terrain": "Interior jungle basin",
+      "featureType": "Secret",
+      "occupants": "A hidden hermit observer",
+      "discovery": "A freshwater pool under luminous vines",
+      "hook": "The hermit knows why imperial scouts are really here.",
+      "gmNote": "Reward cautious exploration."
+    },
+    {
+      "label": "Hex 7",
+      "terrain": "Broken watch post",
+      "featureType": "Faction Activity",
+      "occupants": "Imperial surveyors under guard",
+      "discovery": "Survey stakes hammered into ancient stone",
+      "hook": "Their maps imply a planned claim over the whole island chain.",
+      "gmNote": "Strong campaign-pressure hex."
+    }
+  ]
+}
