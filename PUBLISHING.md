@@ -28,8 +28,10 @@ Update `module.json` once the repo exists:
 
 Example GitHub pattern:
 - `url`: `https://github.com/Dredloxx/shattered-lands-island-generator`
-- `manifest`: `https://github.com/Dredloxx/shattered-lands-island-generator/releases/latest/download/module.json`
-- `download`: `https://github.com/Dredloxx/shattered-lands-island-generator/releases/latest/download/shattered-lands-island-generator.zip`
+- `manifest`: `https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator/main/module.json`
+- `download`: `https://github.com/Dredloxx/shattered-lands-island-generator/archive/refs/heads/main.zip`
+
+This raw-manifest + branch-zip setup is the fastest path until a proper GitHub Release flow is in place.
 
 ## Release Workflow
 
