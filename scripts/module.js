@@ -67,8 +67,17 @@ Hooks.on("renderJournalDirectory", (_app, html) => {
 Hooks.on("getSceneControlButtons", (controls) => {
   if (!game.user?.isGM) return;
 
-  const notesControl = controls.find((control) => control.name === "notes");
+  const controlsArray = Array.isArray(controls) ? controls : controls?.controls;
+  if (!Array.isArray(controlsArray)) {
+    console.warn("[SL Island Generator] Scene controls payload was not an array", controls);
+    return;
+  }
+
+  const notesControl = controlsArray.find((control) => control.name === "notes");
   if (!notesControl) return;
+
+  notesControl.tools ??= [];
+  if (notesControl.tools.some((tool) => tool.name === "generate-region-journal")) return;
 
   notesControl.tools.push({
     name: "generate-region-journal",

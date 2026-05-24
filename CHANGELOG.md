@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.7
+- Fixed the scene control hook for Foundry v13 by handling the actual controls payload shape
+- Added guardrails so the module no longer crashes scene controls when the hook argument is not a plain array
+- Prevented duplicate tool insertion into the Notes control
+
 ## 0.0.6
 - Replaced the deprecated FormApplication-based settings launcher with an ApplicationV2 launcher for Foundry v13
 - Settings launcher now triggers direct region journal generation without relying on legacy form behavior

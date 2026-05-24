@@ -2,7 +2,7 @@
   "id": "shattered-lands-island-generator",
   "title": "Shattered Lands Island Generator",
   "description": "Generate Shattered Lands island regions, journals, and eventually tile layouts.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "authors": [
     {
       "name": "Dredlox"
