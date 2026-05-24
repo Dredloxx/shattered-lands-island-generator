@@ -6,7 +6,7 @@ Publish this module from its own git repository so Foundry can install it via ma
 
 ## Suggested Repo Name
 
-`shattered-lands-island-generator`
+`shattered-lands-island-generator-v2`
 
 ## Files to Host
 
@@ -27,9 +27,9 @@ Update `module.json` once the repo exists:
 - `download`
 
 Example GitHub pattern:
-- `url`: `https://github.com/Dredloxx/shattered-lands-island-generator`
-- `manifest`: `https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator/main/module.json`
-- `download`: `https://github.com/Dredloxx/shattered-lands-island-generator/archive/refs/heads/main.zip`
+- `url`: `https://github.com/Dredloxx/shattered-lands-island-generator-v2`
+- `manifest`: `https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator-v2/main/module.json`
+- `download`: `https://github.com/Dredloxx/shattered-lands-island-generator-v2/archive/refs/heads/main.zip`
 
 This raw-manifest + branch-zip setup is the fastest path until a proper GitHub Release flow is in place.
 

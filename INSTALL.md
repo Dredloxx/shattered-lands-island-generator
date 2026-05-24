@@ -6,7 +6,7 @@
 
 ## Manifest URL
 
-`https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator/main/module.json`
+`https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator-v2/main/module.json`
 
 ## First Test
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+- Changed module identity to `shattered-lands-island-generator-v2-v2` to force a clean Foundry install path
+- This is intended to break stale runtime/update state that survived normal module upgrades
+- Carries forward the island-journal generation model and scene-linked overwrite behavior
+
 ## 0.1.1
 - Removed the unstable scene-controls hook while the rest of the module stabilizes
 - Kept working entry points through Module Settings, the Journal sidebar button, and the console helper

@@ -1,7 +1,7 @@
 import { ISLAND_REGION_LAYOUT, REGION_TEMPLATES } from "./region-data.js";
 import { generateIslandJournalContent } from "./region-generator.js";
 
-const MODULE_ID = "shattered-lands-island-generator";
+const MODULE_ID = "shattered-lands-island-generator-v2";
 
 Hooks.once("init", () => {
   console.log("[SL Island Generator] Initializing module");
