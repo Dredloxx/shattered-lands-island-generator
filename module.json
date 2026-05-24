@@ -1,5 +1,5 @@
 {
-  "id": "shattered-lands-island-generator-v2-v2",
+  "id": "shattered-lands-island-generator-v2",
   "title": "Shattered Lands Island Generator",
   "description": "Generate Shattered Lands island journals, region structures, and eventually tile layouts.",
   "version": "0.2.0",
@@ -21,7 +21,7 @@
   "relationships": {
     "systems": []
   },
-  "url": "https://github.com/Dredloxx/shattered-lands-island-generator-v2",
-  "manifest": "https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator-v2/main/module.json",
-  "download": "https://github.com/Dredloxx/shattered-lands-island-generator-v2/archive/refs/heads/main.zip"
+  "url": "https://github.com/Dredloxx/shattered-lands-island-generator",
+  "manifest": "https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator/main/module.json",
+  "download": "https://github.com/Dredloxx/shattered-lands-island-generator/archive/refs/heads/main.zip"
 }
