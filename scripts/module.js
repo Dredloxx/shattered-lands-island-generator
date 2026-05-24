@@ -152,7 +152,8 @@ async function createRegionJournal({ templateId, regionName } = {}) {
   });
 
   ui.notifications.info(`Created region journal: ${journal.name}`);
-  journal.sheet?.render(true);
+  await journal.sheet?.render(true);
+  await journal.sheet?.maximize?.();
   return journal;
 }
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.9
+- Made successful journal generation more obvious by opening the created journal immediately
+- Kept the direct-create workflow but improved feedback so the action no longer feels invisible
+
 ## 0.0.8
 - Fixed the scene control hook again by handling Foundry v13 hook arguments more defensively
 - The module now searches hook arguments for the actual controls array instead of assuming the first argument is the payload
