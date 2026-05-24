@@ -1,33 +1,32 @@
 # Shattered Lands Island Generator
 
-Foundry VTT module scaffold for generating Shattered Lands island regions.
+Foundry VTT module scaffold for generating Shattered Lands island journals.
 
 ## Current Scope
 
 This repo is for the **full island generator project**.
 
-The first implemented subsystem is **region journal generation**, which gives us the content backbone for later map and tile automation.
+The first implemented subsystem is now **island journal generation**, which gives us the content backbone for later map and tile automation.
 
-## MVP Goal
+## Current Behavior
 
-Create a Foundry module that lets a GM:
+The module currently generates **one island journal per scene**.
 
-1. Open the generator from module settings, the Journal sidebar, scene controls, or the exposed global helper.
-2. Choose a region template.
-3. Generate a journal entry with:
-   - region summary
-   - 7 hex sections
-   - hooks, threats, discoveries, and GM notes
-4. Grow from there into region tile placement and full island assembly.
+Each generated island journal contains:
+- an island summary
+- **7 regions**
+- **7 hexes inside each region**
+
+Regeneration updates the existing scene-linked island journal in place instead of creating an endless list of new journals.
 
 ## Planned Milestones
 
-### Milestone 1, Journal Backbone
+### Milestone 1, Island Journal Backbone
 - Module scaffold
 - Register settings
-- Add `Generate Region Journal` dialog
-- Load region templates from JSON
-- Create a Foundry JournalEntry from structured data
+- Add `Generate Island Journal` entry points
+- Generate one island journal containing 7 regions with 7 hexes each
+- Overwrite the scene-linked generated journal instead of duplicating it
 
 ### Milestone 2, Region Tile Layer
 - Region tile definitions
@@ -52,9 +51,3 @@ Create a Foundry module that lets a GM:
 ## Target Platform
 
 - Foundry VTT v13, build 344
-- JournalEntry pages are the primary output target
-
-## Open Questions
-
-- Whether generated journals should be plain text, HTML, or richer page-based multi-page entries
-- Whether each hex should become a separate journal page later

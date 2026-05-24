@@ -1,5 +1,5 @@
-import { REGION_TEMPLATES } from "./region-data.js";
-import { generateRegionJournalContent, pickRegionTemplate } from "./region-generator.js";
+import { ISLAND_REGION_LAYOUT, REGION_TEMPLATES } from "./region-data.js";
+import { generateIslandJournalContent } from "./region-generator.js";
 
 const MODULE_ID = "shattered-lands-island-generator";
 
@@ -7,26 +7,26 @@ Hooks.once("init", () => {
   console.log("[SL Island Generator] Initializing module");
 
   game.settings.registerMenu(MODULE_ID, "openGeneratorMenu", {
-    name: "Generate Default Region Journal",
-    label: "Generate Journal",
-    hint: "Generate a region journal immediately using the default template.",
+    name: "Generate Island Journal",
+    label: "Generate Island",
+    hint: "Generate or update the island journal for the current scene.",
     icon: "fas fa-map",
-    type: RegionGeneratorLauncher,
+    type: IslandGeneratorLauncher,
     restricted: true
   });
 
   game.settings.register(MODULE_ID, "defaultFolderName", {
     name: "Default Journal Folder",
-    hint: "Folder name used for generated Shattered Lands region journals.",
+    hint: "Folder name used for generated Shattered Lands island journals.",
     scope: "world",
     config: true,
     type: String,
-    default: "Shattered Lands Regions"
+    default: "Shattered Lands Islands"
   });
 
   game.settings.register(MODULE_ID, "prefixSceneName", {
     name: "Prefix Scene Name",
-    hint: "Add the current scene name to generated region journal titles when available.",
+    hint: "Add the current scene name to generated island journal titles when available.",
     scope: "world",
     config: true,
     type: Boolean,
@@ -36,9 +36,11 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
   game.shatteredLandsIslandGenerator = {
+    openIslandJournalGenerator: openGenerator,
     openRegionJournalGenerator: openGenerator,
-    createRegionJournal,
-    templates: REGION_TEMPLATES
+    createOrUpdateIslandJournal,
+    templates: REGION_TEMPLATES,
+    islandLayout: ISLAND_REGION_LAYOUT
   };
 
   window.shatteredLandsIslandGenerator = game.shatteredLandsIslandGenerator;
@@ -59,7 +61,7 @@ Hooks.on("renderJournalDirectory", (_app, html) => {
   const button = document.createElement("button");
   button.type = "button";
   button.dataset.action = `${MODULE_ID}-generate`;
-  button.innerHTML = '<i class="fas fa-map"></i> Generate Region Journal';
+  button.innerHTML = '<i class="fas fa-map"></i> Generate Island Journal';
   button.addEventListener("click", () => openGenerator());
   headerActions.appendChild(button);
 });
@@ -79,11 +81,11 @@ Hooks.on("getSceneControlButtons", (...args) => {
   if (!notesControl) return;
 
   notesControl.tools ??= [];
-  if (notesControl.tools.some((tool) => tool.name === "generate-region-journal")) return;
+  if (notesControl.tools.some((tool) => tool.name === "generate-island-journal")) return;
 
   notesControl.tools.push({
-    name: "generate-region-journal",
-    title: "Generate Region Journal",
+    name: "generate-island-journal",
+    title: "Generate Island Journal",
     icon: "fas fa-book-open",
     button: true,
     onClick: () => openGenerator()
@@ -92,29 +94,13 @@ Hooks.on("getSceneControlButtons", (...args) => {
 
 async function openGenerator() {
   const activeScene = game.scenes?.current;
-  const suggestedName = activeScene ? `${activeScene.name} Region` : "";
-  const template = REGION_TEMPLATES[0];
-
-  if (!template) {
-    ui.notifications.error("No region templates are available.");
-    return null;
-  }
-
-  return createRegionJournal({
-    templateId: template.id,
-    regionName: suggestedName
-  });
+  const islandName = activeScene?.name ? `${activeScene.name} Island` : "Generated Island";
+  return createOrUpdateIslandJournal({ islandName });
 }
 
-async function createRegionJournal({ templateId, regionName } = {}) {
-  const template = pickRegionTemplate(templateId);
-  if (!template) {
-    ui.notifications.error("No region template was found.");
-    return null;
-  }
-
-  const folderName = game.settings.get(MODULE_ID, "defaultFolderName");
+async function createOrUpdateIslandJournal({ islandName } = {}) {
   const prefixSceneName = game.settings.get(MODULE_ID, "prefixSceneName");
+  const folderName = game.settings.get(MODULE_ID, "defaultFolderName");
   const activeScene = game.scenes?.current;
 
   let folder = game.folders?.find((entry) => entry.type === "JournalEntry" && entry.name === folderName);
@@ -122,11 +108,45 @@ async function createRegionJournal({ templateId, regionName } = {}) {
     folder = await Folder.create({ name: folderName, type: "JournalEntry" });
   }
 
-  const finalRegionName = buildRegionName({ template, regionName, activeScene, prefixSceneName });
-  const generated = generateRegionJournalContent(template, {
-    regionName: finalRegionName,
+  const finalIslandName = buildIslandName({ islandName, activeScene, prefixSceneName });
+  const generated = generateIslandJournalContent({
+    islandName: finalIslandName,
     sceneName: activeScene?.name ?? null
   });
+
+  const existingJournal = game.journal?.find((entry) => {
+    const flags = entry.flags?.[MODULE_ID];
+    return flags?.sceneId && flags.sceneId === activeScene?.id;
+  });
+
+  if (existingJournal) {
+    const page = existingJournal.pages?.contents?.[0] ?? existingJournal.pages?.[0];
+    if (page) {
+      await page.update({
+        name: "Overview",
+        "text.content": generated.html,
+        "text.format": 1
+      });
+    }
+
+    await existingJournal.update({
+      name: generated.title,
+      folder: folder.id,
+      flags: {
+        [MODULE_ID]: {
+          generatedAt: new Date().toISOString(),
+          sceneId: activeScene?.id ?? null,
+          sceneName: activeScene?.name ?? null,
+          regionCount: generated.regionCount
+        }
+      }
+    });
+
+    ui.notifications.info(`Updated island journal: ${existingJournal.name}`);
+    await existingJournal.sheet?.render(true);
+    await existingJournal.sheet?.maximize?.();
+    return existingJournal;
+  }
 
   const journal = await JournalEntry.create({
     name: generated.title,
@@ -143,28 +163,28 @@ async function createRegionJournal({ templateId, regionName } = {}) {
     ],
     flags: {
       [MODULE_ID]: {
-        templateId: template.id,
         generatedAt: new Date().toISOString(),
         sceneId: activeScene?.id ?? null,
-        sceneName: activeScene?.name ?? null
+        sceneName: activeScene?.name ?? null,
+        regionCount: generated.regionCount
       }
     }
   });
 
-  ui.notifications.info(`Created region journal: ${journal.name}`);
+  ui.notifications.info(`Created island journal: ${journal.name}`);
   await journal.sheet?.render(true);
   await journal.sheet?.maximize?.();
   return journal;
 }
 
-function buildRegionName({ template, regionName, activeScene, prefixSceneName }) {
-  const trimmed = regionName?.trim();
+function buildIslandName({ islandName, activeScene, prefixSceneName }) {
+  const trimmed = islandName?.trim();
   if (trimmed) return trimmed;
-  if (prefixSceneName && activeScene?.name) return `${activeScene.name} - ${template.name}`;
-  return template.name;
+  if (prefixSceneName && activeScene?.name) return `${activeScene.name} Island`;
+  return "Generated Island";
 }
 
-class RegionGeneratorLauncher extends foundry.applications.api.ApplicationV2 {
+class IslandGeneratorLauncher extends foundry.applications.api.ApplicationV2 {
   static DEFAULT_OPTIONS = {
     id: `${MODULE_ID}-launcher`,
     tag: "div",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+- Shifted generation from single-region journals to full island journals
+- Island journals now contain 7 regions, each with 7 hexes
+- Generation now updates the scene-linked island journal in place instead of creating endless duplicates
+- Updated module entry points and docs to match island-first behavior
+
 ## 0.0.9
 - Made successful journal generation more obvious by opening the created journal immediately
 - Kept the direct-create workflow but improved feedback so the action no longer feels invisible

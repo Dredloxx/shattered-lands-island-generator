@@ -4,23 +4,22 @@
 
 `/home/dredlox/.openclaw/workspace/shattered-lands/island-generator`
 
-## Manual Install
+## Manifest URL
 
-Copy or symlink this folder into your Foundry VTT Data `modules` directory, then enable:
-
-`Shattered Lands Island Generator`
+`https://raw.githubusercontent.com/Dredloxx/shattered-lands-island-generator/main/module.json`
 
 ## First Test
 
 1. Open the target world in Foundry v13.
-2. Enable the module.
-3. Try one of these entry points:
-   - Game Settings -> Module Settings -> Shattered Lands Island Generator -> Open Generator
+2. Update/enable the module.
+3. Use one of these entry points:
+   - Game Settings -> Module Settings -> Shattered Lands Island Generator -> Generate Island
    - Journal sidebar header button
    - Notes controls button
-   - browser console: `game.shatteredLandsIslandGenerator.openRegionJournalGenerator()`
-4. Generate a test journal and confirm it appears in the journal directory.
+   - browser console: `game.shatteredLandsIslandGenerator.openIslandJournalGenerator()`
+4. Confirm an island journal opens immediately.
+5. Run it again and confirm it updates the same scene-linked journal instead of making another one.
 
 ## Notes
 
-This is the full island-generator project, but right now the implemented feature set is still journal-first. Tile placement is not implemented yet.
+This is still journal-first. Tile placement is not implemented yet.

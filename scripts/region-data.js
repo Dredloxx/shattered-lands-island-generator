@@ -150,3 +150,13 @@ export const REGION_TEMPLATES = [
     ]
   }
 ];
+
+export const ISLAND_REGION_LAYOUT = [
+  { slot: 1, label: "Region 1", templateId: "stormbreak-coast-01", regionRole: "Landing Coast" },
+  { slot: 2, label: "Region 2", templateId: "ember-isle-01", regionRole: "Volcanic Interior" },
+  { slot: 3, label: "Region 3", templateId: "stormbreak-coast-01", regionRole: "Western Shore" },
+  { slot: 4, label: "Region 4", templateId: "ember-isle-01", regionRole: "Ashen Ridge" },
+  { slot: 5, label: "Region 5", templateId: "stormbreak-coast-01", regionRole: "Old Ward Coast" },
+  { slot: 6, label: "Region 6", templateId: "ember-isle-01", regionRole: "Inner Basin" },
+  { slot: 7, label: "Region 7", templateId: "stormbreak-coast-01", regionRole: "Outer Cliffs" }
+];
