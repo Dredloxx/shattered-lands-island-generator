@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6
+- Replaced the deprecated FormApplication-based settings launcher with an ApplicationV2 launcher for Foundry v13
+- Settings launcher now triggers direct region journal generation without relying on legacy form behavior
+
 ## 0.0.5
 - Replaced the fragile prompt-based launcher with a direct journal generation fallback
 - Generator now creates a journal immediately using the first region template and current scene context

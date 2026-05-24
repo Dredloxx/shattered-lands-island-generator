@@ -7,9 +7,9 @@ Hooks.once("init", () => {
   console.log("[SL Island Generator] Initializing module");
 
   game.settings.registerMenu(MODULE_ID, "openGeneratorMenu", {
-    name: "Open Region Journal Generator",
-    label: "Open Generator",
-    hint: "Open the Shattered Lands region journal generator dialog.",
+    name: "Generate Default Region Journal",
+    label: "Generate Journal",
+    hint: "Generate a region journal immediately using the default template.",
     icon: "fas fa-map",
     type: RegionGeneratorLauncher,
     restricted: true
@@ -152,13 +152,17 @@ function buildRegionName({ template, regionName, activeScene, prefixSceneName })
   return template.name;
 }
 
-class RegionGeneratorLauncher extends FormApplication {
-  async _updateObject() {
-    return;
-  }
+class RegionGeneratorLauncher extends foundry.applications.api.ApplicationV2 {
+  static DEFAULT_OPTIONS = {
+    id: `${MODULE_ID}-launcher`,
+    tag: "div",
+    window: {
+      title: "Shattered Lands Island Generator"
+    }
+  };
 
-  async render(force, options) {
+  async _renderHTML() {
     await openGenerator();
-    return super.close(options);
+    return "<div></div>";
   }
 }
