@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.5
+- Replaced the fragile prompt-based launcher with a direct journal generation fallback
+- Generator now creates a journal immediately using the first region template and current scene context
+- This prioritizes a reliable button workflow before reintroducing a richer selection dialog
+
 ## 0.0.4
 - Fixed the generator dialog callback for Foundry v13's jQuery-wrapped dialog HTML
 - Added a safer fallback when the form element cannot be read

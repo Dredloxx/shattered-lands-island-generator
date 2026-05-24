@@ -80,38 +80,18 @@ Hooks.on("getSceneControlButtons", (controls) => {
 });
 
 async function openGenerator() {
-  const templateOptions = REGION_TEMPLATES.map((template) => `\n        <option value="${template.id}">${template.name}</option>`).join("");
   const activeScene = game.scenes?.current;
   const suggestedName = activeScene ? `${activeScene.name} Region` : "";
+  const template = REGION_TEMPLATES[0];
 
-  const content = `
-    <form>
-      <div class="form-group">
-        <label>Region Template</label>
-        <select name="templateId">${templateOptions}
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Region Name Override</label>
-        <input type="text" name="regionName" value="${suggestedName}" placeholder="Optional custom name" />
-      </div>
-    </form>
-  `;
+  if (!template) {
+    ui.notifications.error("No region templates are available.");
+    return null;
+  }
 
-  return Dialog.prompt({
-    title: "Generate Region Journal",
-    content,
-    label: "Generate",
-    callback: async (html) => {
-      const root = html?.jquery ? html[0] : html;
-      const form = root?.querySelector?.("form");
-      if (!form) {
-        ui.notifications.error("Could not read the region generator form.");
-        return null;
-      }
-      const formData = new FormDataExtended(form).object;
-      return createRegionJournal(formData);
-    }
+  return createRegionJournal({
+    templateId: template.id,
+    regionName: suggestedName
   });
 }
 
