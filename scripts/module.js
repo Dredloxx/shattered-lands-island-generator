@@ -103,7 +103,12 @@ async function openGenerator() {
     content,
     label: "Generate",
     callback: async (html) => {
-      const form = html.querySelector("form");
+      const root = html?.jquery ? html[0] : html;
+      const form = root?.querySelector?.("form");
+      if (!form) {
+        ui.notifications.error("Could not read the region generator form.");
+        return null;
+      }
       const formData = new FormDataExtended(form).object;
       return createRegionJournal(formData);
     }

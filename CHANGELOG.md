@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+- Fixed the generator dialog callback for Foundry v13's jQuery-wrapped dialog HTML
+- Added a safer fallback when the form element cannot be read
+
 ## 0.0.3
 - Added a reliable Module Settings launcher for the generator
 - Exposed `game.shatteredLandsIslandGenerator.openRegionJournalGenerator()` as a direct fallback
