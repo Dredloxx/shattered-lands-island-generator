@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.3
+- Added a reliable Module Settings launcher for the generator
+- Exposed `game.shatteredLandsIslandGenerator.openRegionJournalGenerator()` as a direct fallback
+- Improved install/test instructions with multiple entry points
+
 ## 0.0.2
 - Improved Foundry v13 visibility for the journal generator entry points
 - Added a Journal directory header button for generating region journals

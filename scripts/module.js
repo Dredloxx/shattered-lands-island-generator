@@ -6,6 +6,15 @@ const MODULE_ID = "shattered-lands-island-generator";
 Hooks.once("init", () => {
   console.log("[SL Island Generator] Initializing module");
 
+  game.settings.registerMenu(MODULE_ID, "openGeneratorMenu", {
+    name: "Open Region Journal Generator",
+    label: "Open Generator",
+    hint: "Open the Shattered Lands region journal generator dialog.",
+    icon: "fas fa-map",
+    type: RegionGeneratorLauncher,
+    restricted: true
+  });
+
   game.settings.register(MODULE_ID, "defaultFolderName", {
     name: "Default Journal Folder",
     hint: "Folder name used for generated Shattered Lands region journals.",
@@ -31,6 +40,8 @@ Hooks.once("ready", () => {
     createRegionJournal,
     templates: REGION_TEMPLATES
   };
+
+  window.shatteredLandsIslandGenerator = game.shatteredLandsIslandGenerator;
 
   console.log("[SL Island Generator] Ready");
 });
@@ -154,4 +165,15 @@ function buildRegionName({ template, regionName, activeScene, prefixSceneName })
   if (trimmed) return trimmed;
   if (prefixSceneName && activeScene?.name) return `${activeScene.name} - ${template.name}`;
   return template.name;
+}
+
+class RegionGeneratorLauncher extends FormApplication {
+  async _updateObject() {
+    return;
+  }
+
+  async render(force, options) {
+    await openGenerator();
+    return super.close(options);
+  }
 }

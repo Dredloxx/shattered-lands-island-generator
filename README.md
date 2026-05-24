@@ -12,7 +12,7 @@ The first implemented subsystem is **region journal generation**, which gives us
 
 Create a Foundry module that lets a GM:
 
-1. Click a button from the Journal sidebar or scene controls.
+1. Open the generator from module settings, the Journal sidebar, scene controls, or the exposed global helper.
 2. Choose a region template.
 3. Generate a journal entry with:
    - region summary
