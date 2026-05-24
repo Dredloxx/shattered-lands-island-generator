@@ -1,7 +1,11 @@
 # Changelog
 
+## 0.2.1
+- Corrected the v2 manifest after stale/cached metadata pointed Foundry at a non-existent repo
+- Keeps the fresh module identity while restoring install URLs to the real repository
+
 ## 0.2.0
-- Changed module identity to `shattered-lands-island-generator-v2-v2` to force a clean Foundry install path
+- Changed module identity to `shattered-lands-island-generator-v2` to force a clean Foundry install path
 - This is intended to break stale runtime/update state that survived normal module upgrades
 - Carries forward the island-journal generation model and scene-linked overwrite behavior
 
