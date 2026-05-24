@@ -66,30 +66,8 @@ Hooks.on("renderJournalDirectory", (_app, html) => {
   headerActions.appendChild(button);
 });
 
-Hooks.on("getSceneControlButtons", (...args) => {
-  if (!game.user?.isGM) return;
-
-  const controlsArray = args.find((value) => Array.isArray(value))
-    ?? args.find((value) => Array.isArray(value?.controls))?.controls;
-
-  if (!Array.isArray(controlsArray)) {
-    console.warn("[SL Island Generator] Could not resolve scene controls payload", args);
-    return;
-  }
-
-  const notesControl = controlsArray.find((control) => control?.name === "notes");
-  if (!notesControl) return;
-
-  notesControl.tools ??= [];
-  if (notesControl.tools.some((tool) => tool.name === "generate-island-journal")) return;
-
-  notesControl.tools.push({
-    name: "generate-island-journal",
-    title: "Generate Island Journal",
-    icon: "fas fa-book-open",
-    button: true,
-    onClick: () => openGenerator()
-  });
+Hooks.on("getSceneControlButtons", () => {
+  return;
 });
 
 async function openGenerator() {

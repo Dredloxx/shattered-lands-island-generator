@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+- Removed the unstable scene-controls hook while the rest of the module stabilizes
+- Kept working entry points through Module Settings, the Journal sidebar button, and the console helper
+- Prevented the toolbar hook from breaking the whole module at startup
+
 ## 0.1.0
 - Shifted generation from single-region journals to full island journals
 - Island journals now contain 7 regions, each with 7 hexes
