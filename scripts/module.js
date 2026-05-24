@@ -35,32 +35,36 @@ Hooks.once("ready", () => {
   console.log("[SL Island Generator] Ready");
 });
 
-Hooks.on("getJournalDirectoryEntryContext", (_html, entries) => {
-  entries.push({
-    name: "Generate Shattered Lands Region Journal",
-    icon: '<i class="fas fa-map"></i>',
-    condition: () => game.user?.isGM,
-    callback: () => openGenerator()
-  });
+Hooks.on("renderJournalDirectory", (_app, html) => {
+  if (!game.user?.isGM) return;
+  if (html[0]?.querySelector(`button[data-action="${MODULE_ID}-generate"]`)) return;
+
+  const headerActions = html[0]?.querySelector(".directory-header .header-actions")
+    ?? html[0]?.querySelector(".directory-header")
+    ?? html[0];
+
+  if (!headerActions) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.dataset.action = `${MODULE_ID}-generate`;
+  button.innerHTML = '<i class="fas fa-map"></i> Generate Region Journal';
+  button.addEventListener("click", () => openGenerator());
+  headerActions.appendChild(button);
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
   if (!game.user?.isGM) return;
 
-  controls.push({
-    name: "sl-island-generator",
-    title: "Shattered Lands",
-    icon: "fas fa-island-tropical",
-    layer: "TilesLayer",
-    tools: [
-      {
-        name: "generate-region-journal",
-        title: "Generate Region Journal",
-        icon: "fas fa-book-open",
-        button: true,
-        onClick: () => openGenerator()
-      }
-    ]
+  const notesControl = controls.find((control) => control.name === "notes");
+  if (!notesControl) return;
+
+  notesControl.tools.push({
+    name: "generate-region-journal",
+    title: "Generate Region Journal",
+    icon: "fas fa-book-open",
+    button: true,
+    onClick: () => openGenerator()
   });
 });
 
