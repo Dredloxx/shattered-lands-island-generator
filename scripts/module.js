@@ -64,16 +64,18 @@ Hooks.on("renderJournalDirectory", (_app, html) => {
   headerActions.appendChild(button);
 });
 
-Hooks.on("getSceneControlButtons", (controls) => {
+Hooks.on("getSceneControlButtons", (...args) => {
   if (!game.user?.isGM) return;
 
-  const controlsArray = Array.isArray(controls) ? controls : controls?.controls;
+  const controlsArray = args.find((value) => Array.isArray(value))
+    ?? args.find((value) => Array.isArray(value?.controls))?.controls;
+
   if (!Array.isArray(controlsArray)) {
-    console.warn("[SL Island Generator] Scene controls payload was not an array", controls);
+    console.warn("[SL Island Generator] Could not resolve scene controls payload", args);
     return;
   }
 
-  const notesControl = controlsArray.find((control) => control.name === "notes");
+  const notesControl = controlsArray.find((control) => control?.name === "notes");
   if (!notesControl) return;
 
   notesControl.tools ??= [];

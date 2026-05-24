@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.8
+- Fixed the scene control hook again by handling Foundry v13 hook arguments more defensively
+- The module now searches hook arguments for the actual controls array instead of assuming the first argument is the payload
+- Added better warnings when the controls payload cannot be resolved
+
 ## 0.0.7
 - Fixed the scene control hook for Foundry v13 by handling the actual controls payload shape
 - Added guardrails so the module no longer crashes scene controls when the hook argument is not a plain array
